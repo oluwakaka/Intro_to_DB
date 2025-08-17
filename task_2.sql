@@ -21,11 +21,7 @@ CREATE TABLE IF NOT EXISTS Books (
   price DOUBLE NOT NULL,
   publication_date DATE NOT NULL,
   PRIMARY KEY (book_id),
-  CONSTRAINT fk_books_authors
-    FOREIGN KEY (author_id)
-    REFERENCES Authors (author_id)
-    ON UPDATE CASCADE
-    ON DELETE RESTRICT
+  FOREIGN KEY (author_id) REFERENCES Authors(author_id)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4 COLLATE=UTF8MB4_UNICODE_CI;
 
 -- CUSTOMERS TABLE
@@ -43,11 +39,7 @@ CREATE TABLE IF NOT EXISTS Orders (
   customer_id INT NOT NULL,
   order_date DATE NOT NULL,
   PRIMARY KEY (order_id),
-  CONSTRAINT fk_orders_customers
-    FOREIGN KEY (customer_id)
-    REFERENCES Customers (customer_id)
-    ON UPDATE CASCADE
-    ON DELETE RESTRICT
+  FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4 COLLATE=UTF8MB4_UNICODE_CI;
 
 -- ORDER_DETAILS TABLE
@@ -57,14 +49,6 @@ CREATE TABLE IF NOT EXISTS Order_Details (
   book_id INT NOT NULL,
   quantity DOUBLE NOT NULL,
   PRIMARY KEY (orderdetailid),
-  CONSTRAINT fk_orderdetails_orders
-    FOREIGN KEY (order_id)
-    REFERENCES Orders (order_id)
-    ON UPDATE CASCADE
-    ON DELETE CASCADE,
-  CONSTRAINT fk_orderdetails_books
-    FOREIGN KEY (book_id)
-    REFERENCES Books (book_id)
-    ON UPDATE CASCADE
-    ON DELETE RESTRICT
+  FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+  FOREIGN KEY (book_id) REFERENCES Books(book_id)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4 COLLATE=UTF8MB4_UNICODE_CI;
